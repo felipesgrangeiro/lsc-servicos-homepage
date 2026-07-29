@@ -45,7 +45,7 @@ export default function Home() {
         </header>
         <div className="heroContent shell">
           <h1>Onde a<br />operação<br />exige força,<br />a LSC entrega<br /><em>resultado.</em></h1>
-          <p className="heroCopy">Infraestrutura, equipamentos e execução para projetos que exigem escala, precisão e continuidade.</p>
+          <p className="heroCopy">Equipamentos próprios, locação especializada e execução de serviços para operações que exigem escala, precisão e continuidade.</p>
           <a className="primaryButton" href="#solucoes">Conheça nossas soluções <ArrowRight size={17} /></a>
         </div>
         <div className="scrollCue"><span></span> EXPLORE</div>
@@ -53,7 +53,7 @@ export default function Home() {
 
       <section className="stats"><div className="shell statsGrid">
         <div className="stat"><CalendarDays /><div><strong>30+</strong><b>anos de experiência</b><p>História sólida construída com segurança, qualidade e confiança.</p></div></div>
-        <div className="stat"><Truck /><div><strong>100+</strong><b>equipamentos</b><p>Frota própria e moderna para atender operações de alto nível.</p></div></div>
+        <div className="stat"><Truck /><div><strong>Frota própria</strong><b>e moderna</b><p>Mais controle, disponibilidade e agilidade para operações de grande porte.</p></div></div>
         <div className="stat"><Ruler /><div><strong>20 mil m²</strong><b>de estrutura</b><p>Área própria para apoio, manutenção e operação de grande porte.</p></div></div>
         <div className="stat"><Users /><div><strong>Parte do</strong><b>Grupo TB</b><p>Soluções integradas com transporte, armazenagem e suporte operacional.</p></div></div>
       </div></section>
@@ -81,7 +81,7 @@ export default function Home() {
         <div className="sectionTop"><h3>Equipamentos para<br />grandes operações.</h3><a href="#contato">Ver frota completa <ArrowRight size={16}/></a></div>
         <div className="productStage">
           <button className="slideArrow left" aria-label="Equipamento anterior"><ChevronLeft /></button>
-          <div className="specPanel"><small>ESCAVADEIRA HIDRÁULICA</small><h4>JOHN DEERE 350G</h4><div className="machineSpecs"><div><Weight/><span><small>Peso operacional</small><b>30.300 kg</b></span></div><div><Gauge/><span><small>Potência bruta</small><b>213 hp</b></span></div><div><Box/><span><small>Capacidade da caçamba</small><b>2,1 m³</b></span></div></div><a href="#contato">Ver detalhes <ArrowRight size={14}/></a></div>
+          <div className="specPanel"><small>ESCAVADEIRA HIDRÁULICA</small><h4>JOHN DEERE 350G</h4><div className="machineSpecs"><div><Weight/><span><small>Peso operacional</small><b>30.300 kg</b></span></div><div><Gauge/><span><small>Potência bruta</small><b>213 hp</b></span></div><div><Box/><span><small>Capacidade da caçamba</small><b>2,1 m³</b></span></div></div><a href="#contato">Ver detalhes <ArrowRight size={18}/></a></div>
           <div className="productImage" />
           <button className="slideArrow right" aria-label="Próximo equipamento"><ChevronRight /></button>
         </div>
@@ -91,10 +91,10 @@ export default function Home() {
       <section className="ecosystem" id="grupo"><div className="shell ecosystemGrid">
         <div><p className="eyebrow">Ecossistema integrado</p><h2>A força de um grupo.<br />A eficiência de uma<br />operação completa.</h2></div>
         <div className="companies">
-          <div><img className="companyLogo logoTb" src="/images/logo-tb-transportes.png" alt="TB Transportes" /><small>Transportes</small><p>Transporte de cargas e operações logísticas.</p></div><ArrowRight />
-          <div><img className="companyLogo" src="/images/logo-tmc.png" alt="TMC Terminais" /><small>Terminais</small><p>Armazenagem e operação portuária.</p></div><ArrowRight />
+          <div><img className="companyLogo logoTb" src="/images/logo-tb-transportes.png" alt="TB Transportes" /><p>Transporte de cargas e operações logísticas.</p></div><ArrowRight />
+          <div><img className="companyLogo logoTmc" src="/images/logo-tmc.png" alt="TMC Terminais" /><p>Armazenagem e operação portuária.</p></div><ArrowRight />
           <div className="activeCompany"><img className="companyLogo officialLscLogo" src="/images/lsc-logo-header-white-yellow.png" alt="LSC — Locação de Equipamentos e Serviços" /><p>Infraestrutura, equipamentos e execução.</p></div><ArrowRight />
-          <div><img className="companyLogo logoTruck" src="/images/logo-truck-center.png" alt="Truck Center Pecém" /><small>Suporte</small><p>Manutenção e suporte para frota.</p></div>
+          <div><img className="companyLogo logoTruck" src="/images/logo-truck-center.png" alt="Truck Center Pecém" /><p>Manutenção e suporte para frota.</p></div>
         </div>
       </div></section>
 
