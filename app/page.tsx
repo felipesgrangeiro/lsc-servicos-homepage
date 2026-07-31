@@ -67,7 +67,18 @@ export default function Home() {
             <a href="#contato">Ver todas as soluções <ArrowRight size={16} /></a>
           </div>
         </div>
-        <div className="sectorGrid">{sectors.map((s) => <article className="sectorCard" key={s.title} style={{"--image": `url(${s.image})`} as React.CSSProperties}><div><h4>{s.title.split("\n").map((line, i) => <span key={i}>{line}</span>)}</h4><p>{s.text}</p></div><button aria-label={`Ver ${s.title}`}><ArrowRight size={20}/></button></article>)}</div>
+        <div className="sectorGrid">{sectors.map((s) => (
+          <article className="sectorCard" key={s.title}>
+            <div className="sectorMedia" style={{"--image": `url(${s.image})`} as React.CSSProperties} />
+            <div className="sectorInfo">
+              <div>
+                <h4>{s.title.split("\n").map((line, i) => <span key={i}>{line}</span>)}</h4>
+                <p>{s.text}</p>
+              </div>
+              <button aria-label={`Ver ${s.title}`}><ArrowRight size={20}/></button>
+            </div>
+          </article>
+        ))}</div>
       </section>
 
       <section className="process" id="processo"><div className="shell">
@@ -100,7 +111,19 @@ export default function Home() {
 
       <section className="cases shell" id="cases">
         <p className="eyebrow">Cases</p><div className="sectionTop"><h3>Operações reais.<br />Resultados comprovados.</h3><a href="#contato">Ver todos os cases <ArrowRight size={16}/></a></div>
-        <div className="caseGrid">{projects.map(p => <article className="caseCard" key={p.title} style={{"--image": `url(${p.image})`} as React.CSSProperties}><div><b>{p.tag}</b><small>{p.title}</small><h4>{p.place}</h4></div><ArrowRight /></article>)}</div>
+        <div className="caseGrid">{projects.map(p => (
+          <article className="caseCard" key={p.title}>
+            <div className="caseMedia" style={{"--image": `url(${p.image})`} as React.CSSProperties} />
+            <div className="caseInfo">
+              <div>
+                <b>{p.tag}</b>
+                <small>{p.title}</small>
+                <h4>{p.place}</h4>
+              </div>
+              <ArrowRight />
+            </div>
+          </article>
+        ))}</div>
       </section>
 
       <section className="cta" id="contato"><div className="shell ctaGrid"><h2>Vamos colocar sua operação<br /><em>em movimento.</em></h2><div><p>Fale com um especialista e descubra como a LSC pode entregar força e infraestrutura que seu projeto precisa.</p><a className="goldButton" href="mailto:contato@lscservicos.com.br">Falar com um especialista <ArrowRight size={16}/></a></div></div></section>
