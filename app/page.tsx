@@ -4,10 +4,10 @@ import { useState } from "react";
 import { ArrowRight, Box, CalendarDays, Camera, CheckCircle, ChevronLeft, ChevronRight, ClipboardList, Gauge, Link, Mail, MapPin, Menu, Network, Phone, Ruler, Truck, Users, Weight, Wrench, X } from "lucide-react";
 
 const sectors = [
-  { title: "Portos e\nterminais", text: "Infraestrutura e apoio operacional para movimentação de cargas e materiais.", image: "/images/sector-ports-v2.png" },
-  { title: "Indústrias", text: "Soluções completas para pátios industriais, usinas e plantas de produção.", image: "/images/case-industry.png" },
-  { title: "Mineração e\nbritagem", text: "Britagem, classificação e produção de agregados com alta performance.", image: "/images/sector-mining-v2.png" },
-  { title: "Obras e\ninfraestrutura", text: "Terraplenagem, pavimentação e apoio para obras de grande escala.", image: "/images/sector-infrastructure-v2.png" },
+  { title: "Portos e\nterminais", text: "Infraestrutura e apoio operacional para movimentação de cargas e materiais.", image: "/images/sector-ports-v2.jpg" },
+  { title: "Indústrias", text: "Soluções completas para pátios industriais, usinas e plantas de produção.", image: "/images/case-industry.jpg" },
+  { title: "Mineração e\nbritagem", text: "Britagem, classificação e produção de agregados com alta performance.", image: "/images/sector-mining-v2.jpg" },
+  { title: "Obras e\ninfraestrutura", text: "Terraplenagem, pavimentação e apoio para obras de grande escala.", image: "/images/sector-infrastructure-v2.jpg" },
 ];
 
 const process = [
@@ -21,10 +21,10 @@ const process = [
 // TODO: as quatro imagens sao provisorias — nenhuma retrata a obra de fato,
 // so foram distribuidas para nao repetir foto na grade.
 const projects = [
-  { tag: "Infraestrutura hídrica", name: "Eixão das Águas", place: "Castanhão à Grande Fortaleza — CE", detail: "255 km de adutora abastecendo a Região Metropolitana e o Complexo do Pecém.", image: "/images/case-infrastructure.png" },
-  { tag: "Infraestrutura hídrica", name: "Transposição do São Francisco", place: "Semiárido nordestino", detail: "R$ 12 bilhões investidos para levar água a 12 milhões de pessoas em 400 municípios.", image: "/images/case-mining.png" },
-  { tag: "Ferrovia", name: "Transnordestina", place: "CE · PI · PE", detail: "1.206 km ligando o sertão ao mar para grãos, combustíveis e minério.", image: "/images/case-port.png" },
-  { tag: "Barragem", name: "Barragem do Castanhão", place: "Alto Santo — CE", detail: "Maior barragem de múltiplos usos da América Latina, com 37% da água do estado.", image: "/images/lsc-excavator-v2.png" },
+  { tag: "Infraestrutura hídrica", name: "Eixão das Águas", place: "Castanhão à Grande Fortaleza — CE", detail: "255 km de adutora abastecendo a Região Metropolitana e o Complexo do Pecém.", image: "/images/case-infrastructure.jpg" },
+  { tag: "Infraestrutura hídrica", name: "Transposição do São Francisco", place: "Semiárido nordestino", detail: "R$ 12 bilhões investidos para levar água a 12 milhões de pessoas em 400 municípios.", image: "/images/case-mining.jpg" },
+  { tag: "Ferrovia", name: "Transnordestina", place: "CE · PI · PE", detail: "1.206 km ligando o sertão ao mar para grãos, combustíveis e minério.", image: "/images/case-port.jpg" },
+  { tag: "Barragem", name: "Barragem do Castanhão", place: "Alto Santo — CE", detail: "Maior barragem de múltiplos usos da América Latina, com 37% da água do estado.", image: "/images/lsc-excavator-v2.jpg" },
 ];
 
 function Brand({ light = true, header = false }: { light?: boolean; header?: boolean }) {
