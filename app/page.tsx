@@ -5,7 +5,7 @@ import { ArrowRight, Box, CalendarDays, Camera, CheckCircle, ChevronLeft, Chevro
 
 const sectors = [
   { title: "Portos e\nterminais", text: "Infraestrutura e apoio operacional para movimentação de cargas e materiais.", image: "/images/sector-ports-v2.png" },
-  { title: "Indústrias", text: "Soluções completas para pátios industriais, usinas e plantas de produção.", image: "/images/sector-industry-v2.png" },
+  { title: "Indústrias", text: "Soluções completas para pátios industriais, usinas e plantas de produção.", image: "/images/case-industry.png" },
   { title: "Mineração e\nbritagem", text: "Britagem, classificação e produção de agregados com alta performance.", image: "/images/sector-mining-v2.png" },
   { title: "Obras e\ninfraestrutura", text: "Terraplenagem, pavimentação e apoio para obras de grande escala.", image: "/images/sector-infrastructure-v2.png" },
 ];
@@ -18,11 +18,13 @@ const process = [
   { n: "05", title: "Resultados", text: "Entregamos valor com segurança, qualidade e compromisso.", icon: CheckCircle },
 ];
 
+// TODO: as quatro imagens sao provisorias — nenhuma retrata a obra de fato,
+// so foram distribuidas para nao repetir foto na grade.
 const projects = [
-  { tag: "Porto", title: "Movimentação de Minério", place: "Terminal Portuário — BA", image: "/images/case-port.png" },
-  { tag: "Indústria", title: "Apoio à Parada Industrial", place: "Complexo Industrial — CE", image: "/images/case-industry.png" },
-  { tag: "Mineração", title: "Produção de Agregados", place: "Mina a Céu Aberto — CE", image: "/images/case-mining.png" },
-  { tag: "Obra", title: "Terraplenagem e Drenagem", place: "Obra de Infraestrutura — CE", image: "/images/case-infrastructure.png" },
+  { tag: "Infraestrutura hídrica", name: "Eixão das Águas", place: "Castanhão à Grande Fortaleza — CE", detail: "255 km de adutora abastecendo a Região Metropolitana e o Complexo do Pecém.", image: "/images/case-infrastructure.png" },
+  { tag: "Infraestrutura hídrica", name: "Transposição do São Francisco", place: "Semiárido nordestino", detail: "R$ 12 bilhões investidos para levar água a 12 milhões de pessoas em 400 municípios.", image: "/images/case-mining.png" },
+  { tag: "Ferrovia", name: "Transnordestina", place: "CE · PI · PE", detail: "1.206 km ligando o sertão ao mar para grãos, combustíveis e minério.", image: "/images/case-port.png" },
+  { tag: "Barragem", name: "Barragem do Castanhão", place: "Alto Santo — CE", detail: "Maior barragem de múltiplos usos da América Latina, com 37% da água do estado.", image: "/images/lsc-excavator-v2.png" },
 ];
 
 function Brand({ light = true, header = false }: { light?: boolean; header?: boolean }) {
@@ -112,13 +114,14 @@ export default function Home() {
       <section className="cases shell" id="cases">
         <p className="eyebrow">Cases</p><div className="sectionTop"><h3>Operações reais.<br />Resultados comprovados.</h3><a href="#contato">Ver todos os cases <ArrowRight size={16}/></a></div>
         <div className="caseGrid">{projects.map(p => (
-          <article className="caseCard" key={p.title}>
+          <article className="caseCard" key={p.name}>
             <div className="caseMedia" style={{"--image": `url(${p.image})`} as React.CSSProperties} />
             <div className="caseInfo">
               <div>
                 <b>{p.tag}</b>
-                <small>{p.title}</small>
-                <h4>{p.place}</h4>
+                <small>{p.place}</small>
+                <h4>{p.name}</h4>
+                {p.detail && <p>{p.detail}</p>}
               </div>
               <ArrowRight />
             </div>

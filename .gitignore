@@ -40,3 +40,7 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# masters de imagem (nao usados pelo site, so os derivados em JPEG)
+/public/images/LSC-HERO - cópia.png
+tsconfig.tsbuildinfo

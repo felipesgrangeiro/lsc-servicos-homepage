@@ -47,6 +47,7 @@
 body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;font-kerning:normal;text-rendering:geometricPrecision}
 .hero h1,.manifesto h2,.sectionTop h3,.process h2,.ecosystem h2,.cta h2{font-weight:300;letter-spacing:-.052em}
 .hero h1{letter-spacing:-.046em}
+.hero h1 em{font-weight:500}
 .navLinks a,.outlineButton,.primaryButton,.goldButton{font-weight:600;letter-spacing:-.015em}
 .heroCopy{font-weight:400;letter-spacing:-.02em}
 .eyebrow{font-weight:650;letter-spacing:.1em}
@@ -195,12 +196,38 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
 
 /* Hero image supplied by the client */
 .hero{
-  background-image:
-    linear-gradient(90deg,rgba(4,8,10,.82) 0%,rgba(4,8,10,.38) 44%,rgba(4,8,10,.06) 74%),
-    linear-gradient(0deg,rgba(4,8,10,.5),transparent 45%),
-    url('/images/lsc-hero-official.jpg');
+  background-image:url('/images/lsc-hero-1920.jpg');
+  background-image:image-set(
+    url('/images/lsc-hero-1920.jpg') 1x,
+    url('/images/lsc-hero-2880.jpg') 1.5x
+  );
   background-position:center;
   background-size:cover;
+}
+@media(max-width:1280px){
+  .hero{
+    background-image:url('/images/lsc-hero-1280.jpg');
+    background-image:image-set(
+      url('/images/lsc-hero-1280.jpg') 1x,
+      url('/images/lsc-hero-2880.jpg') 2x
+    );
+  }
+}
+/* Em telas largas a foto encosta nas duas bordas, entao o enquadramento so
+   muda ampliando um pouco e ancorando a esquerda: isso empurra a carregadeira
+   para a direita e libera a coluna do titulo */
+@media(min-width:1001px) and (min-aspect-ratio:3/2){
+  .hero{
+    background-size:114% auto;
+    background-position:left center;
+  }
+}
+/* Recorte vertical (4:5) centrado na carregadeira para telas estreitas */
+@media(max-width:640px){
+  .hero{
+    background-image:url('/images/lsc-hero-mobile.jpg');
+    background-position:center;
+  }
 }
 
 /* Keep CTA clear of the stats band when copy wraps */
@@ -371,4 +398,98 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
   .caseCard{height:auto}
   .caseMedia{height:190px;min-height:190px}
   .caseInfo{min-height:110px;padding:18px 16px}
+}
+
+/* Hover do menu: sublinhado amarelo em vez de troca de cor do texto */
+.navLinks a{position:relative}
+.navLinks a:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-7px;
+  height:2px;
+  background:var(--amber);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .28s ease;
+}
+.navLinks a:hover{color:inherit}
+.navLinks a:hover:after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){
+  .navLinks a:after{transition:none}
+}
+
+/* Scrim curto no topo: garante leitura do menu sobre o ceu claro da foto
+   sem escurecer o resto da imagem */
+.hero:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:190px;
+  background:linear-gradient(180deg,rgba(4,8,10,.34) 0%,rgba(4,8,10,.15) 55%,rgba(4,8,10,0) 100%);
+  pointer-events:none;
+  z-index:1;
+}
+.navLinks a{opacity:1;text-shadow:0 1px 2px rgba(0,0,0,.22)}
+.navLinks a:hover{color:inherit;opacity:1}
+@media(max-width:640px){
+  .hero:before{height:130px}
+}
+
+/* CTA do header: preenchimento amarelo que entra pela esquerda no hover */
+.outlineButton{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  border-color:rgba(255,255,255,.65);
+  transition:border-color .3s ease,color .3s ease;
+}
+.outlineButton:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--amber);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .34s cubic-bezier(.4,0,.2,1);
+  z-index:-1;
+}
+.outlineButton:hover{
+  color:#111;
+  border-color:var(--amber);
+  text-shadow:none;
+}
+.outlineButton:hover:before{transform:scaleX(1)}
+.outlineButton svg{transition:transform .34s cubic-bezier(.4,0,.2,1)}
+.outlineButton:hover svg{transform:translateX(4px)}
+@media(prefers-reduced-motion:reduce){
+  .outlineButton:before,.outlineButton svg{transition:none}
+  .outlineButton:hover svg{transform:none}
+}
+
+/* Vitrine de equipamentos alinhada a grade da secao (mesma largura do titulo
+   e do link "Ver frota completa") */
+@media(min-width:1001px){
+  .productStage{
+    max-width:none;
+    width:100%;
+    --panelWidth:280px;
+    grid-template-columns:var(--panelWidth) 1fr;
+  }
+  /* Sem margem sobrando fora da grade, as setas passam a flanquear a foto */
+  .slideArrow.left{left:calc(var(--panelWidth) + 20px)}
+  .slideArrow.right{right:20px}
+}
+
+/* Cases: nome da obra em destaque na faixa preta, local acima e linha de apoio */
+.caseInfo h4{font-size:17px;line-height:1.15;margin:5px 0 0;max-width:22ch}
+.caseInfo p{font-size:11px;line-height:1.5;color:#c4c7c7;margin:10px 0 0;max-width:28ch}
+@media(min-width:1001px){
+  .caseInfo{min-height:172px}
+}
+@media(max-width:640px){
+  .caseInfo{min-height:0}
 }
