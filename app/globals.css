@@ -493,3 +493,396 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
 @media(max-width:640px){
   .caseInfo{min-height:0}
 }
+
+/* Cards de cases com alturas iguais: a foto passa a ter altura fixa e a faixa
+   preta absorve a variacao de texto, para as faixas comecarem na mesma linha */
+.caseMedia{flex:none}
+.caseInfo{flex:1 1 auto;align-items:flex-start}
+.caseInfo>svg{align-self:flex-end}
+
+/* Links "ver todos": sublinhado ambar que cresce da esquerda e seta que avanca,
+   mesma linguagem do hover do menu e do CTA do topo */
+.solutionsCopy a,.sectionTop a{position:relative}
+.solutionsCopy a:after,.sectionTop a:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:2px;
+  background:var(--amber);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.solutionsCopy a:hover:after,.sectionTop a:hover:after{transform:scaleX(1)}
+.solutionsCopy a svg,.sectionTop a svg{transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.solutionsCopy a:hover svg,.sectionTop a:hover svg{transform:translateX(5px)}
+@media(prefers-reduced-motion:reduce){
+  .solutionsCopy a:after,.sectionTop a:after,
+  .solutionsCopy a svg,.sectionTop a svg{transition:none}
+  .solutionsCopy a:hover svg,.sectionTop a:hover svg{transform:none}
+}
+
+/* Cards de solucoes: foto amplia levemente no hover do card e o botao da seta
+   fica amarelo no hover dele */
+.sectorMedia{overflow:hidden;background-image:none}
+.sectorMedia:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:var(--image);
+  background-size:cover;
+  background-position:center;
+  transition:transform .55s cubic-bezier(.2,0,.2,1);
+}
+.sectorCard:hover .sectorMedia:after{transform:scale(1.07)}
+.sectorInfo{position:relative;z-index:1}
+.sectorInfo button{
+  cursor:pointer;
+  transition:background-color .28s ease,color .28s ease;
+}
+.sectorInfo button:hover{background:var(--amber);color:#111}
+@media(prefers-reduced-motion:reduce){
+  .sectorMedia:after{transition:none}
+  .sectorCard:hover .sectorMedia:after{transform:none}
+}
+
+/* Cards de cases com o mesmo hover dos cards de solucoes: foto amplia e a
+   seta avanca */
+.caseMedia{position:relative;overflow:hidden;background-image:none}
+.caseMedia:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:var(--image);
+  background-size:cover;
+  background-position:center;
+  transition:transform .55s cubic-bezier(.2,0,.2,1);
+}
+.caseCard:hover .caseMedia:after{transform:scale(1.07)}
+.caseInfo{position:relative;z-index:1}
+.caseInfo>svg{transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.caseCard:hover .caseInfo>svg{transform:translateX(5px)}
+@media(prefers-reduced-motion:reduce){
+  .caseMedia:after,.caseInfo>svg{transition:none}
+  .caseCard:hover .caseMedia:after,.caseCard:hover .caseInfo>svg{transform:none}
+}
+
+/* ---------- Pagina de detalhe do case ---------- */
+.casePage{background:var(--paper);color:var(--ink)}
+.casePageNav{
+  height:110px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:absolute;
+  left:0;
+  right:0;
+  margin:0 auto;
+  z-index:5;
+  color:#fff;
+}
+.casePageBack{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  position:relative;
+}
+.casePageBack:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:2px;
+  background:var(--amber);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.casePageBack:hover:after{transform:scaleX(1)}
+.casePageBack svg{transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.casePageBack:hover svg{transform:translateX(-5px)}
+
+.casePageHero{
+  position:relative;
+  min-height:62svh;
+  display:flex;
+  align-items:flex-end;
+  padding-bottom:56px;
+  color:#fff;
+  background-image:var(--image);
+  background-size:cover;
+  background-position:center;
+}
+.casePageHero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg,rgba(4,8,10,.86) 0%,rgba(4,8,10,.35) 48%,rgba(4,8,10,.5) 100%);
+}
+.casePageHeroInner{position:relative;z-index:1}
+.casePageHero h1{
+  font-size:clamp(38px,4.4vw,72px);
+  font-weight:300;
+  line-height:.96;
+  letter-spacing:-.045em;
+  text-transform:uppercase;
+  margin:16px 0 0;
+  max-width:16ch;
+}
+.casePagePlace{font-size:14px;color:#d3d5d5;margin:14px 0 0}
+
+.casePageBody{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:9%;
+  padding:80px 0 20px;
+  align-items:start;
+}
+.casePageText p{font-size:17px;line-height:1.75;color:#3d4041;margin:0 0 22px;max-width:62ch}
+.casePageFacts{margin:0;display:grid;gap:0}
+.casePageFacts>div{border-top:1px solid #d6d5d0;padding:16px 0}
+.casePageFacts>div:last-child{border-bottom:1px solid #d6d5d0}
+.casePageFacts dt{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#83868a}
+.casePageFacts dd{margin:7px 0 0;font-size:17px;letter-spacing:-.02em}
+
+.casePageOthers{padding:70px 0 90px}
+.casePageOthers .sectionTop{margin-bottom:32px}
+.casePageOthers h3{font-size:clamp(26px,2.4vw,36px)}
+
+@media(max-width:1000px){
+  .casePageBody{grid-template-columns:1fr;gap:44px;padding-top:60px}
+  .casePageOthers .caseGrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .casePageNav{height:85px}
+  .casePageHero{min-height:56svh;padding-bottom:40px}
+  .casePageText p{font-size:15px}
+  .casePageOthers{padding:50px 0 70px}
+  .casePageOthers .caseGrid{grid-template-columns:1fr}
+}
+
+/* Redes sociais no rodape, abaixo da logo.
+   Seletor ancorado em .footerGrid para vencer .footerGrid>div:not(.contact)
+   a:hover, que pinta os links do rodape de amarelo e apagaria o icone. */
+.footerGrid .social{display:flex;gap:10px;margin-top:30px}
+.footerGrid .social a{
+  width:34px;
+  height:34px;
+  margin:0;
+  border:1px solid #4d5151;
+  display:grid;
+  place-items:center;
+  color:#c9cccc;
+  transition:color .25s ease,border-color .25s ease,background-color .25s ease;
+}
+.footerGrid .social a svg{width:15px;height:15px}
+.footerGrid .social a:hover{color:#0b0f10;background:var(--amber);border-color:var(--amber)}
+
+/* ---------- Cabecalho fixo ---------- */
+.siteHeader{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  /* Fora da .hero o cabecalho nao herda mais o branco dela */
+  color:#fff;
+  transition:background-color .3s ease,box-shadow .3s ease;
+}
+/* Fundo solido, nao translucido: sobre o fundo claro da pagina o desfoque
+   vira um cinza sujo e derruba o contraste do menu */
+.siteHeaderSolid{
+  background:#0b0f10;
+  box-shadow:0 10px 30px rgba(4,8,10,.18);
+}
+.siteHeader .nav{position:relative;transition:height .3s ease}
+/* Barra encolhe ao rolar, liberando area util */
+.siteHeaderSolid .nav{height:84px}
+.siteHeaderSolid .navLinks a{text-shadow:none;opacity:1}
+/* A barra saiu do fluxo: o topo do heroi e da capa do case reservam o espaco */
+.hero{padding-top:110px}
+.casePageHero{padding-top:110px}
+.casePageBack{margin-bottom:26px}
+@media(max-width:640px){
+  .hero{padding-top:85px}
+  .casePageHero{padding-top:85px}
+}
+@media(prefers-reduced-motion:reduce){
+  .siteHeader{transition:none}
+}
+
+/* CTA principal maior: e o botao de conversao da pagina */
+.goldButton{
+  font-size:13px;
+  letter-spacing:.02em;
+  gap:26px;
+  padding:22px 32px;
+  margin-top:18px;
+  transition:background-color .28s ease,transform .28s cubic-bezier(.4,0,.2,1);
+}
+.goldButton svg{width:20px;height:20px;transition:transform .28s cubic-bezier(.4,0,.2,1)}
+.goldButton:hover{background:#c8941a}
+.goldButton:hover svg{transform:translateX(5px)}
+@media(max-width:640px){
+  .goldButton{font-size:12px;padding:19px 24px;gap:20px;width:100%;justify-content:space-between}
+}
+@media(prefers-reduced-motion:reduce){
+  .goldButton,.goldButton svg{transition:none}
+  .goldButton:hover svg{transform:none}
+}
+
+/* Cards de solucoes agora sao links: a seta deixa de ser <button> e passa a
+   reagir ao hover do card inteiro, como nos cards de cases */
+.sectorArrow{
+  width:42px;
+  height:42px;
+  flex-shrink:0;
+  background:rgba(255,255,255,.08);
+  color:var(--amber);
+  display:grid;
+  place-items:center;
+  transition:background-color .28s ease,color .28s ease,transform .28s cubic-bezier(.4,0,.2,1);
+}
+.sectorCard:hover .sectorArrow{background:var(--amber);color:#0b0f10;transform:translateX(4px)}
+.sectorInfo{align-items:flex-end}
+
+/* Frentes de atuacao na pagina de solucao */
+.solutionServices{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.solutionServices li{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  border-top:1px solid #d6d5d0;
+  padding:17px 0;
+  font-size:16px;
+  letter-spacing:-.02em;
+}
+.solutionServices li:last-child{border-bottom:1px solid #d6d5d0}
+.solutionServices svg{color:var(--amber);flex-shrink:0}
+@media(prefers-reduced-motion:reduce){
+  .sectorArrow{transition:none}
+  .sectorCard:hover .sectorArrow{transform:none}
+}
+
+/* Coluna "Empresas" do rodape: marcas do Grupo TB */
+.footerCompanies nav{display:flex;flex-direction:column;gap:20px;margin-top:2px}
+.footerCompanies nav a{
+  display:block;
+  margin:0;
+  opacity:.72;
+  transition:opacity .25s ease;
+}
+.footerCompanies nav a:hover{opacity:1}
+.footerCompanies nav img{height:30px;width:auto;max-width:150px;object-fit:contain;object-position:left center}
+@media(max-width:640px){
+  .footerCompanies nav{gap:16px}
+  .footerCompanies nav img{height:26px}
+}
+
+/* ---------- Secao Grupo TB: respiro, corte do slogan e animacao ---------- */
+
+/* 1. Linhas do titulo estavam quase encostando (line-height .94) */
+.ecosystem h2{line-height:1.12}
+
+/* 2. O arquivo do logo da TB traz o slogan "Evoluindo com VOCÊ" depois de um
+   divisor. O corte e feito aqui, sem alterar o arquivo original. */
+/* No arquivo de 310px: "TB Transportes" vai ate x=167, o divisor "|" ocupa
+   173-175 e o slogan comeca em 180. Cortar em 170 deixa so a marca. */
+.companyLogo.logoTb{
+  width:170px;
+  max-width:170px;
+  height:50px;
+  object-fit:cover;
+  object-position:left center;
+}
+
+/* 3. Entrada em cascata quando a secao aparece, e reacao ao mouse */
+.companies>div{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .6s ease,transform .6s cubic-bezier(.2,0,.2,1),border-color .3s ease;
+}
+.companies>svg{
+  opacity:0;
+  transition:opacity .6s ease .15s;
+}
+.ecosystemVisible .companies>div,
+.ecosystemVisible .companies>svg{opacity:1;transform:none}
+.ecosystemVisible .companies>div:nth-of-type(2){transition-delay:.1s}
+.ecosystemVisible .companies>div:nth-of-type(3){transition-delay:.2s}
+.ecosystemVisible .companies>div:nth-of-type(4){transition-delay:.3s}
+.companies .companyLogo{transition:opacity .3s ease,transform .3s cubic-bezier(.2,0,.2,1)}
+.companies>div:hover .companyLogo{opacity:1;transform:scale(1.06)}
+.companies>div:hover{border-color:var(--amber);border-radius:5px}
+
+@media(prefers-reduced-motion:reduce){
+  .companies>div,.companies>svg,.companies .companyLogo{transition:none;opacity:1;transform:none}
+  .companies>div:hover .companyLogo{transform:none}
+}
+
+/* Vitrine da frota: a altura passa a acompanhar a proporcao da foto
+   (2027x776 = 2.6121), para o equipamento aparecer inteiro em vez de ser
+   cortado no topo e na base em monitores largos. */
+@media(min-width:1001px){
+  .productStage{
+    height:calc((min(1420px, 100vw - 72px) - var(--panelWidth, 280px)) / 2.6121);
+    min-height:340px;
+    max-height:520px;
+  }
+  .productImage{background-position:center center}
+}
+
+/* Contorno sutil na faixa de contato, para separar a foto do fundo claro
+   acima e do rodape escuro abaixo */
+.cta{border:1px solid #2c3233}
+
+/* O contorno amarelo deixa de ser marcacao fixa da LSC e passa a ser reacao
+   ao mouse, valendo para os quatro blocos. A borda transparente ja fica
+   reservada no estado normal para o layout nao pular no hover. */
+.companies>div{border:1px solid transparent;border-radius:5px}
+.activeCompany,
+.activeCompany:not(:hover){border-color:transparent!important}
+.companies>div:hover,
+.activeCompany:hover{border-color:var(--amber)!important}
+
+/* ---------- Pagina Quem somos ---------- */
+.aboutNumbers{background:#0b0f10;color:#fff;padding:44px 0;margin-top:56px}
+.aboutNumbersGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.aboutNumbersGrid>div{border-left:1px solid #2b3132;padding-left:26px}
+.aboutNumbersGrid>div:first-child{border-left:0;padding-left:0}
+.aboutNumbersGrid svg{width:28px;height:28px;color:#c7c9c9;stroke-width:1.2}
+.aboutNumbersGrid strong{display:block;color:var(--amber);font-size:27px;font-weight:400;letter-spacing:-.035em;line-height:1.1;margin-top:16px}
+.aboutNumbersGrid b{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin-top:4px;color:#d4d7d7}
+
+.aboutPillars{padding:78px 0 90px}
+.aboutPillars .sectionTop{margin-bottom:34px}
+.aboutPillars h3{font-size:clamp(26px,2.4vw,36px)}
+.pillarGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pillarGrid article{background:#0f1415;color:#fff;padding:32px 28px;display:flex;flex-direction:column}
+.pillarGrid b{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.pillarGrid p{font-size:15px;line-height:1.65;color:#d0d3d3;margin:18px 0 0}
+.pillarValues ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:11px}
+.pillarValues li{font-size:15px;line-height:1.4;color:#d0d3d3;padding-left:18px;position:relative}
+.pillarValues li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--amber)}
+
+@media(max-width:1000px){
+  .aboutNumbersGrid{grid-template-columns:repeat(3,1fr);gap:24px}
+  .pillarGrid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .aboutNumbers{padding:34px 0;margin-top:40px}
+  .aboutNumbersGrid{grid-template-columns:1fr;gap:24px}
+  .aboutNumbersGrid>div{border-left:0;padding-left:0}
+  .aboutPillars{padding:56px 0 66px}
+}
+
+/* Texto da LSC no mesmo branco das outras empresas: o contorno amarelo agora
+   e reacao ao mouse, entao nao ha mais motivo para o texto ficar destacado */
+.activeCompany p{color:#ccc}
