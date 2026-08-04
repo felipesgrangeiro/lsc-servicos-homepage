@@ -71,7 +71,7 @@ export default async function SolutionPage({ params }: Props) {
       <section className="cta"><div className="shell ctaGrid">
         <h2>Vamos colocar sua operação<br /><em>em movimento.</em></h2>
         <div>
-          <p>Fale com um especialista e descubra como a LSC pode entregar força e infraestrutura que seu projeto precisa.</p>
+          <p>Fale com um especialista e descubra como a LSC pode entregar as máquinas e os serviços que seu projeto precisa.</p>
           <a className="goldButton" href="mailto:contato@lscservicos.com.br">Falar com um especialista <ArrowRight size={16} /></a>
         </div>
       </div></section>

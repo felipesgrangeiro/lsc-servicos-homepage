@@ -18,7 +18,7 @@ export const solutions: Solution[] = [
     slug: "portos-e-terminais",
     title: "Portos e\nterminais",
     name: "Portos e terminais",
-    text: "Infraestrutura e apoio operacional para movimentação de cargas e materiais.",
+    text: "Equipamentos e apoio operacional para movimentação de cargas e materiais.",
     image: "/images/sector-ports-v2.jpg",
     body: [
       "Terminal parado custa caro. A operação portuária trabalha contra o relógio do navio, e cada hora de atraso na movimentação de carga se acumula em toda a cadeia — do pátio ao embarque.",

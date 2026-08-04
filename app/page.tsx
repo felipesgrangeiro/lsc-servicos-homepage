@@ -45,7 +45,7 @@ export default function Home() {
       <section className="sectors shell" id="solucoes">
         <p className="eyebrow">O que fazemos acontecer</p>
         <div className="solutionsIntro">
-          <h3>Infraestrutura para<br />operações que movem<br />o Brasil.</h3>
+          <h3>Máquinas e serviços para<br />operações que movem<br />o Brasil.</h3>
           <div className="solutionsCopy">
             <p>Atuamos em operações complexas e ambientes desafiadores, fornecendo a estrutura, os equipamentos e a expertise necessários para entregar produtividade e resultados.</p>
             <a href="#contato">Ver todas as soluções <ArrowRight size={16} /></a>
@@ -86,7 +86,7 @@ export default function Home() {
       <section className="ecosystem" id="grupo" ref={ecosystemRef}><div className="shell ecosystemGrid">
         <div><p className="eyebrow">Ecossistema integrado</p><h2>A força de um grupo.<br />A eficiência de uma<br />operação completa.</h2></div>
         <div className="companies">
-          <div className="activeCompany"><img className="companyLogo officialLscLogo" src="/images/lsc-logo-header-white-yellow.png" alt="LSC — Locação de Equipamentos e Serviços" /><p>Infraestrutura, equipamentos e execução.</p></div><ArrowRight />
+          <div className="activeCompany"><img className="companyLogo officialLscLogo" src="/images/lsc-logo-header-white-yellow.png" alt="LSC — Locação de Equipamentos e Serviços" /><p>Máquinas, equipamentos e serviços de britagem.</p></div><ArrowRight />
           <div><img className="companyLogo logoTb" src="/images/logo-tb-transportes.png" alt="TB Transportes" /><p>Transporte de cargas e operações logísticas.</p></div><ArrowRight />
           <div><img className="companyLogo logoTmc" src="/images/logo-tmc.png" alt="TMC Terminais" /><p>Armazenagem e operação portuária.</p></div><ArrowRight />
           <div><img className="companyLogo logoTruck" src="/images/logo-truck-center.png" alt="Truck Center Pecém" /><p>Manutenção e suporte para frota.</p></div>
@@ -111,7 +111,7 @@ export default function Home() {
         ))}</div>
       </section>
 
-      <section className="cta" id="contato"><div className="shell ctaGrid"><h2>Vamos colocar sua operação<br /><em>em movimento.</em></h2><div><p>Fale com um especialista e descubra como a LSC pode entregar força e infraestrutura que seu projeto precisa.</p><a className="goldButton" href="mailto:contato@lscservicos.com.br">Falar com um especialista <ArrowRight size={16}/></a></div></div></section>
+      <section className="cta" id="contato"><div className="shell ctaGrid"><h2>Vamos colocar sua operação<br /><em>em movimento.</em></h2><div><p>Fale com um especialista e descubra como a LSC pode entregar as máquinas e os serviços que seu projeto precisa.</p><a className="goldButton" href="mailto:contato@lscservicos.com.br">Falar com um especialista <ArrowRight size={16}/></a></div></div></section>
 
       <SiteFooter />
     </main>
