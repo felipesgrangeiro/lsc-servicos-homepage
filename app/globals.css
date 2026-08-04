@@ -899,3 +899,35 @@ html{scroll-padding-top:124px}
 @media(max-width:640px){
   html{scroll-padding-top:98px}
 }
+
+/* Mobile: a foto vertical tem a carregadeira na metade de cima, entao o
+   texto desce para o chao de pedras em vez de atravessar a maquina.
+   A altura minima garante espaco para os dois sem sobreposicao. */
+@media(max-width:640px){
+  .hero{
+    /* Sem `cover`: a foto se ajusta pela largura e aparece inteira, sem corte
+       lateral. Antes, quanto mais alta a area, mais ela era ampliada e mais a
+       carregadeira saia pelos lados. A altura da foto fica 1,25x a largura da
+       tela (1296x1620), e a carregadeira termina por volta de 0,625x. */
+    background-color:#0b0f10;
+    background-size:100% auto;
+    background-position:top center;
+    background-repeat:no-repeat;
+    min-height:max(700px,calc(100vw * 0.625 + 430px));
+    justify-content:flex-end;
+  }
+  .heroContent{padding-top:0;padding-bottom:8px}
+  /* Escurece do rodape ate logo abaixo da maquina: da leitura ao texto sobre o
+     chao de pedras e disfarca a emenda entre a foto e o fundo solido. */
+  .hero:after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:calc(100% - 100vw * 0.6);
+    background:linear-gradient(0deg,#0b0f10 0%,rgba(11,15,16,.92) 40%,rgba(11,15,16,0) 100%);
+    pointer-events:none;
+    z-index:1;
+  }
+}
