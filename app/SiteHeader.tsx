@@ -6,11 +6,11 @@ import { ArrowRight, Menu, X } from "lucide-react";
 
 const navLinks: [string, string][] = [
   ["Quem somos", "/quem-somos"],
-  ["Soluções", "/#solucoes"],
+  ["Soluções", "/solucoes/portos-e-terminais"],
   ["Operações", "/#processo"],
   ["Frota", "/#frota"],
   ["Grupo TB", "/#grupo"],
-  ["Cases", "/#cases"],
+  ["Cases", "/cases/eixao-das-aguas"],
   ["Contato", "/#contato"],
 ];
 

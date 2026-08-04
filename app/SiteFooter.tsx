@@ -45,17 +45,17 @@ export default function SiteFooter() {
         <div>
           <b>Navegação</b>
           <Link href="/quem-somos">Quem somos</Link>
-          <Link href="/#solucoes">Soluções</Link>
+          <Link href="/solucoes/portos-e-terminais">Soluções</Link>
           <Link href="/#processo">Operações</Link>
           <Link href="/#frota">Frota</Link>
-          <Link href="/#cases">Cases</Link>
+          <Link href="/cases/eixao-das-aguas">Cases</Link>
         </div>
         <div>
           <b>Soluções</b>
-          <Link href="/#solucoes">Portos e Terminais</Link>
-          <Link href="/#solucoes">Indústrias</Link>
-          <Link href="/#solucoes">Mineração e Britagem</Link>
-          <Link href="/#solucoes">Obras e Infraestrutura</Link>
+          <Link href="/solucoes/portos-e-terminais">Portos e Terminais</Link>
+          <Link href="/solucoes/industrias">Indústrias</Link>
+          <Link href="/solucoes/mineracao-e-britagem">Mineração e Britagem</Link>
+          <Link href="/solucoes/obras-e-infraestrutura">Obras e Infraestrutura</Link>
         </div>
         <div className="footerCompanies">
           <b>Empresas</b>
