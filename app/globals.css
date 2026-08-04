@@ -813,8 +813,10 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
   opacity:0;
   transition:opacity .6s ease .15s;
 }
-.ecosystemVisible .companies>div,
-.ecosystemVisible .companies>svg{opacity:1;transform:none}
+.ecosystemVisible .companies>div{opacity:1;transform:none}
+/* A seta nao leva transform na entrada: zerar aqui apagaria o rotate(90deg)
+   que o mobile aplica para a coluna */
+.ecosystemVisible .companies>svg{opacity:1}
 .ecosystemVisible .companies>div:nth-of-type(2){transition-delay:.1s}
 .ecosystemVisible .companies>div:nth-of-type(3){transition-delay:.2s}
 .ecosystemVisible .companies>div:nth-of-type(4){transition-delay:.3s}
@@ -847,6 +849,11 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
    ao mouse, valendo para os quatro blocos. A borda transparente ja fica
    reservada no estado normal para o layout nao pular no hover. */
 .companies>div{border:1px solid transparent;border-radius:5px}
+@media(max-width:640px){
+  /* o shorthand acima zera o separador que o layout em coluna usa */
+  .companies>div{border-bottom-color:#444;border-radius:0}
+  .companies>div:last-of-type{border-bottom-color:transparent}
+}
 .activeCompany,
 .activeCompany:not(:hover){border-color:transparent!important}
 .companies>div:hover,
@@ -886,3 +893,9 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
 /* Texto da LSC no mesmo branco das outras empresas: o contorno amarelo agora
    e reacao ao mouse, entao nao ha mais motivo para o texto ficar destacado */
 .activeCompany p{color:#ccc}
+
+/* Cabecalho fixo cobria o topo da secao ao clicar num link de ancora */
+html{scroll-padding-top:124px}
+@media(max-width:640px){
+  html{scroll-padding-top:98px}
+}

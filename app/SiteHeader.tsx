@@ -27,6 +27,15 @@ export default function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Com o menu aberto em tela cheia, a pagina continuava rolando por tras da
+  // sobreposicao — ao fechar, o visitante caia em outro ponto do site.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previous; };
+  }, [menuOpen]);
+
   return (
     <div className={scrolled ? "siteHeader siteHeaderSolid" : "siteHeader"}>
       <header className="nav shell">
