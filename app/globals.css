@@ -772,18 +772,44 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
 }
 
 /* Coluna "Empresas" do rodape: marcas do Grupo TB */
-.footerCompanies nav{display:flex;flex-direction:column;gap:20px;margin-top:2px}
-.footerCompanies nav a{
+.footerCompanies nav{display:block;margin-top:2px}
+.footerCompanyTrack{display:flex;flex-direction:column;gap:20px}
+/* No desktop a segunda copia da lista nao aparece; ela so serve ao looping */
+.footerCompanyTrack>a:nth-child(n+5){display:none}
+.footerCompanyTrack a{
   display:block;
   margin:0;
   opacity:.72;
   transition:opacity .25s ease;
 }
-.footerCompanies nav a:hover{opacity:1}
-.footerCompanies nav img{height:30px;width:auto;max-width:150px;object-fit:contain;object-position:left center}
+.footerCompanyTrack a:hover{opacity:1}
+.footerCompanyTrack img{height:30px;width:auto;max-width:150px;object-fit:contain;object-position:left center}
 @media(max-width:640px){
-  .footerCompanies nav{gap:16px}
-  .footerCompanies nav img{height:26px}
+  /* A coluna ocupa a largura toda e as marcas passam em looping */
+  .footerCompanies{grid-column:1/-1}
+  .footerCompanies nav{
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+  }
+  .footerCompanyTrack{
+    flex-direction:row;
+    align-items:center;
+    width:max-content;
+    gap:46px;
+    animation:footerBrandScroll 26s linear infinite;
+  }
+  .footerCompanyTrack>a:nth-child(n+5){display:block}
+  .footerCompanyTrack img{height:44px;max-width:200px}
+  .footerCompanies nav:hover .footerCompanyTrack{animation-play-state:paused}
+  /* metade da faixa mais metade do vao emendado, para a volta ser continua */
+  @keyframes footerBrandScroll{
+    from{transform:translateX(0)}
+    to{transform:translateX(calc(-50% - 23px))}
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .footerCompanyTrack{animation:none}
 }
 
 /* ---------- Secao Grupo TB: respiro, corte do slogan e animacao ---------- */

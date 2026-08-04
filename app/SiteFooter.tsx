@@ -60,11 +60,27 @@ export default function SiteFooter() {
         <div className="footerCompanies">
           <b>Empresas</b>
           <nav aria-label="Empresas do Grupo TB">
-            {groupCompanies.map((c) => (
-              <a key={c.name} href={c.href} target="_blank" rel="noopener noreferrer" aria-label={c.logoAlt} title={c.name}>
-                <img src={c.logo} alt={c.logoAlt} />
-              </a>
-            ))}
+            {/* A lista vai duplicada: no mobile as marcas correm em looping e a
+                segunda copia emenda a volta. No desktop ela fica oculta. */}
+            <div className="footerCompanyTrack">
+              {[...groupCompanies, ...groupCompanies].map((c, i) => {
+                const copia = i >= groupCompanies.length;
+                return (
+                  <a
+                    key={`${c.name}-${i}`}
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={copia ? undefined : c.logoAlt}
+                    aria-hidden={copia}
+                    tabIndex={copia ? -1 : undefined}
+                    title={copia ? undefined : c.name}
+                  >
+                    <img src={c.logo} alt={copia ? "" : c.logoAlt} />
+                  </a>
+                );
+              })}
+            </div>
           </nav>
         </div>
         <div className="contact">
