@@ -63,6 +63,7 @@ jobs:
       DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
       SSH_PORT: ${{ secrets.SSH_PORT }}
       NODEVENV_ACTIVATE: ${{ secrets.NODEVENV_ACTIVATE }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
@@ -70,29 +71,39 @@ jobs:
           name: next-build
           path: deploy
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Setup SSH key
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          if ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null; then
+            echo "::error::SSH_PRIVATE_KEY inválida. Cole a chave privada completa (BEGIN/END OPENSSH PRIVATE KEY)."
+            exit 1
+          fi
+          echo "SSH key OK — fingerprint:"
+          ssh-keygen -lf ~/.ssh/deploy_key
 
       - name: Add server to known_hosts
         run: |
+          set -euo pipefail
           PORT="${SSH_PORT:-22}"
-          echo "Connecting to host on port ${PORT}..."
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          if ! nc -z -w 10 "$SSH_HOST" "$PORT"; then
+          echo "Connecting to ${SSH_HOST} on port ${PORT}..."
+          if ! nc -z -w 15 "$SSH_HOST" "$PORT"; then
             echo "::error::SSH port ${PORT} is unreachable from GitHub Actions."
-            echo "Open/whitelist SSH on the server for GitHub Actions IPs."
+            echo "Peça ao admin para liberar a porta ${PORT} para IPs do GitHub Actions."
             exit 1
           fi
-          ssh-keyscan -p "$PORT" -T 10 "$SSH_HOST" >> ~/.ssh/known_hosts
+          ssh-keyscan -p "$PORT" -T 15 "$SSH_HOST" >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
       - name: Sync files to cPanel
         run: |
+          set -euo pipefail
           PORT="${SSH_PORT:-22}"
-          ssh -p "$PORT" -o StrictHostKeyChecking=yes \
+          SSH_OPTS=(-i ~/.ssh/deploy_key -p "$PORT" -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes)
+          ssh "${SSH_OPTS[@]}" \
             "${SSH_USER}@${SSH_HOST}" \
             "mkdir -p '${DEPLOY_PATH}' && mkdir -p '${DEPLOY_PATH}/tmp'"
           tar -C ./deploy \
@@ -100,14 +111,15 @@ jobs:
             --exclude 'tmp' \
             --exclude '.git' \
             -czf - . \
-          | ssh -p "$PORT" -o StrictHostKeyChecking=yes \
+          | ssh "${SSH_OPTS[@]}" \
               "${SSH_USER}@${SSH_HOST}" \
               "tar -xzf - -C '${DEPLOY_PATH}'"
 
       - name: Install production deps and restart
         run: |
+          set -euo pipefail
           PORT="${SSH_PORT:-22}"
-          ssh -p "$PORT" -o StrictHostKeyChecking=yes \
+          ssh -i ~/.ssh/deploy_key -p "$PORT" -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
             "${SSH_USER}@${SSH_HOST}" \
             "DEPLOY_PATH='${DEPLOY_PATH}' NODEVENV_ACTIVATE='${NODEVENV_ACTIVATE}' bash -s" << 'EOF'
             set -euo pipefail
@@ -120,4 +132,6 @@ jobs:
             mkdir -p tmp
             touch tmp/restart.txt
             echo "Deploy finished at $(date) — path: $DEPLOY_PATH"
+            node -v
+            npm -v
           EOF
