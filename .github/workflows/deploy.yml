@@ -39,6 +39,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: next-build
+          include-hidden-files: true
           path: |
             .next
             public
@@ -134,10 +135,17 @@ jobs:
               source "$NODEVENV_ACTIVATE"
             fi
             cd "$DEPLOY_PATH"
-            npm install --omit=dev
+            # Shared hosts can take several minutes on first install
+            npm install --omit=dev --no-fund --no-audit
             mkdir -p tmp
             touch tmp/restart.txt
+            if [ ! -d .next ]; then
+              echo "::error::Pasta .next ausente após o sync. Deploy incompleto."
+              ls -la
+              exit 1
+            fi
             echo "Deploy finished at $(date) — path: $DEPLOY_PATH"
             node -v
             npm -v
+            ls -ld .next
           EOF
