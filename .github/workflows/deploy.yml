@@ -1,0 +1,123 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-lsc-production
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-build
+          path: |
+            .next
+            public
+            app
+            package.json
+            package-lock.json
+            next.config.ts
+            tsconfig.json
+            postcss.config.mjs
+            next-env.d.ts
+            eslint.config.mjs
+            server.js
+          retention-days: 3
+
+  deploy:
+    name: Deploy via SSH (cPanel)
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+      NODEVENV_ACTIVATE: ${{ secrets.NODEVENV_ACTIVATE }}
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: next-build
+          path: deploy
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          PORT="${SSH_PORT:-22}"
+          echo "Connecting to host on port ${PORT}..."
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          if ! nc -z -w 10 "$SSH_HOST" "$PORT"; then
+            echo "::error::SSH port ${PORT} is unreachable from GitHub Actions."
+            echo "Open/whitelist SSH on the server for GitHub Actions IPs."
+            exit 1
+          fi
+          ssh-keyscan -p "$PORT" -T 10 "$SSH_HOST" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Sync files to cPanel
+        run: |
+          PORT="${SSH_PORT:-22}"
+          ssh -p "$PORT" -o StrictHostKeyChecking=yes \
+            "${SSH_USER}@${SSH_HOST}" \
+            "mkdir -p '${DEPLOY_PATH}' && mkdir -p '${DEPLOY_PATH}/tmp'"
+          tar -C ./deploy \
+            --exclude 'node_modules' \
+            --exclude 'tmp' \
+            --exclude '.git' \
+            -czf - . \
+          | ssh -p "$PORT" -o StrictHostKeyChecking=yes \
+              "${SSH_USER}@${SSH_HOST}" \
+              "tar -xzf - -C '${DEPLOY_PATH}'"
+
+      - name: Install production deps and restart
+        run: |
+          PORT="${SSH_PORT:-22}"
+          ssh -p "$PORT" -o StrictHostKeyChecking=yes \
+            "${SSH_USER}@${SSH_HOST}" \
+            "DEPLOY_PATH='${DEPLOY_PATH}' NODEVENV_ACTIVATE='${NODEVENV_ACTIVATE}' bash -s" << 'EOF'
+            set -euo pipefail
+            if [ -n "${NODEVENV_ACTIVATE:-}" ] && [ -f "$NODEVENV_ACTIVATE" ]; then
+              # shellcheck disable=SC1090
+              source "$NODEVENV_ACTIVATE"
+            fi
+            cd "$DEPLOY_PATH"
+            npm install --omit=dev
+            mkdir -p tmp
+            touch tmp/restart.txt
+            echo "Deploy finished at $(date) — path: $DEPLOY_PATH"
+          EOF
