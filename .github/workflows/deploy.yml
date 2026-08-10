@@ -129,16 +129,23 @@ jobs:
           ssh -i ~/.ssh/deploy_key -p "$PORT" -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes \
             "${SSH_USER}@${SSH_HOST}" \
             "DEPLOY_PATH='${DEPLOY_PATH}' NODEVENV_ACTIVATE='${NODEVENV_ACTIVATE}' bash -s" << 'EOF'
-            set -euo pipefail
+            set -eo pipefail
+            # CloudLinux activate referencia CL_VIRTUAL_ENV; set -u aborta o source
             if [ -n "${NODEVENV_ACTIVATE:-}" ] && [ -f "$NODEVENV_ACTIVATE" ]; then
               # shellcheck disable=SC1090
+              set +u
+              # shellcheck disable=SC1090
               source "$NODEVENV_ACTIVATE"
+              set -u
             fi
             cd "$DEPLOY_PATH"
             # Shared hosts can take several minutes on first install
             npm install --omit=dev --no-fund --no-audit
             mkdir -p tmp
             touch tmp/restart.txt
+            if command -v cloudlinux-selector >/dev/null 2>&1; then
+              cloudlinux-selector restart --json --interpreter nodejs --app-root lsc-app || true
+            fi
             if [ ! -d .next ]; then
               echo "::error::Pasta .next ausente após o sync. Deploy incompleto."
               ls -la
