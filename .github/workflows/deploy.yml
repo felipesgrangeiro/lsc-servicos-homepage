@@ -76,10 +76,16 @@ jobs:
           set -euo pipefail
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          KEY_RAW=$(printf '%s' "$SSH_PRIVATE_KEY" | tr -d '\r')
+          if printf '%s' "$KEY_RAW" | grep -q "BEGIN.*PRIVATE KEY"; then
+            printf '%s\n' "$KEY_RAW" > ~/.ssh/deploy_key
+          else
+            # Base64 de uma linha (evita quebra da chave no paste do GitHub)
+            printf '%s' "$KEY_RAW" | base64 --decode > ~/.ssh/deploy_key
+          fi
           chmod 600 ~/.ssh/deploy_key
           if ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null; then
-            echo "::error::SSH_PRIVATE_KEY inválida. Cole a chave privada completa (BEGIN/END OPENSSH PRIVATE KEY)."
+            echo "::error::SSH_PRIVATE_KEY inválida. Cole a privada completa OU o base64 dela."
             exit 1
           fi
           echo "SSH key OK — fingerprint:"
