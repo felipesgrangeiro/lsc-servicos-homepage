@@ -79,7 +79,7 @@ export default function Home() {
       </section>
 
       <section className="ecosystem" id="grupo" ref={ecosystemRef}><div className="shell ecosystemGrid">
-        <div><p className="eyebrow">Ecossistema integrado</p><h2>A força de um grupo.<br />A eficiência de uma<br />operação completa.</h2></div>
+        <div><p className="eyebrow">Ecossistema integrado</p><h2>A força de um grupo.<br />A eficiência de uma operação<br />completa.</h2></div>
         <div className="companies">
           <div className="activeCompany"><img className="companyLogo officialLscLogo" src="/images/lsc-logo-header-white-yellow.png" alt="LSC — Locação de Equipamentos e Serviços" /><p>Máquinas, equipamentos e serviços de britagem.</p></div><ArrowRight />
           <div><img className="companyLogo logoTb" src="/images/logo-tb-transportes.png" alt="TB Transportes" /><p>Transporte de cargas e operações logísticas.</p></div><ArrowRight />

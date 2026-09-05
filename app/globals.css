@@ -880,10 +880,45 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
   .footerCompanyTrack{animation-duration:36s}
 }
 
+/* ---------- Desktop intermediario (~1280x800): menu e ecossistema ---------- */
+@media(min-width:1001px) and (max-width:1400px){
+  .shell{width:min(1888px,calc(100% - 88px))}
+  .nav{height:120px}
+  .brand.officialBrand.headerBrand{width:158px;flex-shrink:0}
+  .navLinks{
+    gap:18px;
+    margin-left:36px;
+    margin-right:28px;
+    flex:1 1 auto;
+    min-width:0;
+    justify-content:flex-end;
+  }
+  .navLinks a{
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .outlineButton.navCta{
+    flex-shrink:0;
+    padding:14px 14px;
+    gap:10px;
+    font-size:9px;
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .siteHeaderSolid .nav{height:76px}
+
+  .ecosystemGrid{
+    grid-template-columns:minmax(240px,.72fr) minmax(0,1.28fr);
+    gap:28px;
+  }
+  .ecosystem h2{font-size:clamp(28px,2.5vw,34px);line-height:1.14}
+}
+
 /* ---------- Secao Grupo TB: respiro, corte do slogan e animacao ---------- */
 
 /* 1. Linhas do titulo estavam quase encostando (line-height .94) */
 .ecosystem h2{line-height:1.12}
+.ecosystemGrid>div:first-child{min-width:0}
 
 /* 2. O arquivo do logo da TB traz o slogan "Evoluindo com VOCÊ" depois de um
    divisor. O corte e feito aqui, sem alterar o arquivo original. */
@@ -895,6 +930,35 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
   height:50px;
   object-fit:cover;
   object-position:left center;
+}
+
+/* Em ~1280 as 4 marcas precisam caber na box sem a ultima vazando */
+@media(min-width:1001px) and (max-width:1400px){
+  .companies{
+    min-width:0;
+    width:100%;
+    grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr);
+  }
+  .companies>div{
+    min-width:0;
+    min-height:128px;
+    padding:14px 8px;
+    overflow:hidden;
+  }
+  .companies>svg{width:14px;height:14px}
+  .companies p{font-size:11px;line-height:1.4}
+  .companies .companyLogo{
+    max-width:100%;
+    width:auto;
+  }
+  .companies .companyLogo.logoTb{
+    width:100%;
+    max-width:110px;
+    height:34px;
+  }
+  .companies .companyLogo.logoTmc{height:48px;max-height:48px}
+  .companies .companyLogo.logoTruck{height:28px;max-height:28px}
+  .companies .companyLogo.officialLscLogo{height:36px;max-height:36px}
 }
 
 /* 3. Entrada em cascata quando a secao aparece, e reacao ao mouse */
