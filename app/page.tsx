@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import SiteHeader from "./SiteHeader";
+import EquipmentCarousel from "./EquipmentCarousel";
 import { useRevealOnScroll } from "./useRevealOnScroll";
 import { solutions } from "./solucoes/data";
 import SiteFooter from "./SiteFooter";
 import { cases } from "./cases/data";
-import { ArrowRight, Box, CalendarDays, CheckCircle, ChevronLeft, ChevronRight, ClipboardList, Gauge, Network, Ruler, Truck, Users, Weight, Wrench } from "lucide-react";
+import { ArrowRight, CalendarDays, CheckCircle, ClipboardList, Network, Ruler, Truck, Users, Wrench } from "lucide-react";
 
 const process = [
   { n: "01", title: "Planejamento", text: "Entendemos o desafio e desenhamos a melhor estratégia.", icon: ClipboardList },
@@ -74,13 +75,7 @@ export default function Home() {
       <section className="equipment shell" id="frota">
         <p className="eyebrow">Como é o alto desempenho</p>
         <div className="sectionTop"><h3>Equipamentos para<br />grandes operações.</h3><a href="#contato">Ver frota completa <ArrowRight size={16}/></a></div>
-        <div className="productStage">
-          <button className="slideArrow left" aria-label="Equipamento anterior"><ChevronLeft /></button>
-          <div className="specPanel"><small>ESCAVADEIRA HIDRÁULICA</small><h4>JOHN DEERE 350G</h4><div className="machineSpecs"><div><Weight/><span><small>Peso operacional</small><b>30.300 kg</b></span></div><div><Gauge/><span><small>Potência bruta</small><b>213 hp</b></span></div><div><Box/><span><small>Capacidade da caçamba</small><b>2,1 m³</b></span></div></div><a href="#contato">Ver detalhes <ArrowRight size={18}/></a></div>
-          <div className="productImage" />
-          <button className="slideArrow right" aria-label="Próximo equipamento"><ChevronRight /></button>
-        </div>
-        <div className="dots"><i></i><i></i><i></i><i></i></div>
+        <EquipmentCarousel />
       </section>
 
       <section className="ecosystem" id="grupo" ref={ecosystemRef}><div className="shell ecosystemGrid">
@@ -89,7 +84,7 @@ export default function Home() {
           <div className="activeCompany"><img className="companyLogo officialLscLogo" src="/images/lsc-logo-header-white-yellow.png" alt="LSC — Locação de Equipamentos e Serviços" /><p>Máquinas, equipamentos e serviços de britagem.</p></div><ArrowRight />
           <div><img className="companyLogo logoTb" src="/images/logo-tb-transportes.png" alt="TB Transportes" /><p>Transporte de cargas e operações logísticas.</p></div><ArrowRight />
           <div><img className="companyLogo logoTmc" src="/images/logo-tmc.png" alt="TMC Terminais" /><p>Armazenagem e operação portuária.</p></div><ArrowRight />
-          <div><img className="companyLogo logoTruck" src="/images/logo-truck-center.png" alt="Truck Center Pecém" /><p>Manutenção e suporte para frota.</p></div>
+          <div><img className="companyLogo logoTruck" src="/images/logo-truck-center-branco.png" alt="Truck Center Pecém" /><p>Manutenção e suporte para frota.</p></div>
         </div>
       </div></section>
 
