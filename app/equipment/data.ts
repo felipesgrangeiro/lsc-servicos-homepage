@@ -124,4 +124,30 @@ export const equipmentSlides: EquipmentSlide[] = [
       { icon: "box", label: "Largura da lâmina", value: "3,66 m" },
     ],
   },
+  {
+    id: "motoniveladora-12m",
+    category: "Motoniveladora",
+    name: "Caterpillar 12M",
+    image: "/images/equipment-motoniveladora-12m.jpg",
+    imagePosition: "center center",
+    href: "#contato",
+    specs: [
+      { icon: "weight", label: "Peso operacional", value: "18.400 kg" },
+      { icon: "gauge", label: "Potência líquida", value: "136 kW" },
+      { icon: "box", label: "Largura da lâmina", value: "3,7 m" },
+    ],
+  },
+  {
+    id: "pa-carregadeira-wa200-5",
+    category: "Pá carregadeira",
+    name: "Komatsu WA200-5",
+    image: "/images/equipment-pa-carregadeira-wa200-5.jpg",
+    imagePosition: "center center",
+    href: "#contato",
+    specs: [
+      { icon: "weight", label: "Peso operacional", value: "10.330 kg" },
+      { icon: "gauge", label: "Potência líquida", value: "127 hp" },
+      { icon: "box", label: "Largura da caçamba", value: "2.535 mm" },
+    ],
+  },
 ];
