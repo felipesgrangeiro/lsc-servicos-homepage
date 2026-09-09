@@ -150,4 +150,30 @@ export const equipmentSlides: EquipmentSlide[] = [
       { icon: "box", label: "Largura da caçamba", value: "2.535 mm" },
     ],
   },
+  {
+    id: "pa-carregadeira-hl757",
+    category: "Pá carregadeira",
+    name: "Hyundai HL 757",
+    image: "/images/equipment-pa-carregadeira-hl757.jpg",
+    imagePosition: "center center",
+    href: "#contato",
+    specs: [
+      { icon: "weight", label: "Peso operacional", value: "17.900 kg" },
+      { icon: "gauge", label: "Potência líquida", value: "205 hp" },
+      { icon: "box", label: "Capacidade da caçamba", value: "3 m³" },
+    ],
+  },
+  {
+    id: "rolo-cs533",
+    category: "Rolo compactador",
+    name: "Caterpillar CS-533",
+    image: "/images/equipment-rolo-cs533.jpg",
+    imagePosition: "center 58%",
+    href: "#contato",
+    specs: [
+      { icon: "weight", label: "Peso operacional", value: "11.530 kg" },
+      { icon: "gauge", label: "Potência líquida", value: "130 hp" },
+      { icon: "box", label: "Largura de compactação", value: "1.549 mm" },
+    ],
+  },
 ];

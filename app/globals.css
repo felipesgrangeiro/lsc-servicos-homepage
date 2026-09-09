@@ -165,15 +165,49 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
 }
 .dots button.is-active{width:24px;background:var(--amber)}
 @media(min-width:1001px){
-  .equipment{padding-top:48px;padding-bottom:55px}
-  .equipment .sectionTop{margin-bottom:20px}
-  .equipment .sectionTop h3{font-size:32px;line-height:.94}
-  .productStage{max-width:1040px;height:340px;grid-template-columns:280px 1fr}
-  .specPanel{padding:28px 26px}
-  .specPanel h4{font-size:17px;margin:6px 0 20px}
-  .specPanel>a{bottom:24px}
-  .slideArrow{width:40px;height:40px}
-  .dots{margin-top:12px}
+  .equipment{padding-top:56px;padding-bottom:64px}
+  .equipment .sectionTop{margin-bottom:28px}
+  .equipment .sectionTop h3{font-size:36px;line-height:.94}
+  .productStage{
+    --panelWidth:320px;
+    max-width:1360px;
+    width:100%;
+    margin-inline:auto;
+    height:auto;
+    min-height:0;
+    max-height:none;
+    grid-template-columns:var(--panelWidth) minmax(0,1fr);
+    align-items:stretch;
+  }
+  .productImage{
+    aspect-ratio:2027 / 776;
+    width:100%;
+    min-height:0;
+    background-position:center center;
+  }
+  .specPanel{padding:34px 30px}
+  .specPanel h4{font-size:20px;margin:8px 0 26px}
+  .specPanel>a{bottom:28px}
+  .slideArrow{width:44px;height:44px}
+  .slideArrow.left{left:calc(var(--panelWidth) + 18px)}
+  .slideArrow.right{right:18px}
+  .dots{margin-top:16px}
+}
+@media(min-width:1600px){
+  .equipment{padding-top:64px;padding-bottom:72px}
+  .equipment .sectionTop h3{font-size:40px}
+  .productStage{
+    --panelWidth:360px;
+    max-width:1480px;
+  }
+  /* Um pouco mais alto que a foto (2.61): cover amplia e enquadra melhor em 1920 */
+  .productImage{aspect-ratio:2.35 / 1}
+  .specPanel{padding:40px 34px}
+  .specPanel h4{font-size:22px;margin:10px 0 30px}
+  .machineSpecs{gap:22px;margin-top:8px}
+  .machineSpecs svg{width:28px;height:28px}
+  .machineSpecs span small{font-size:13px}
+  .machineSpecs b{font-size:14px}
 }
 @media(max-width:640px){
   .productImage{background-position:45% center}
@@ -492,18 +526,11 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
   .outlineButton:hover svg{transform:none}
 }
 
-/* Vitrine de equipamentos alinhada a grade da secao (mesma largura do titulo
-   e do link "Ver frota completa") */
+/* Vitrine de equipamentos: setas flanqueiam a foto (largura/altura
+   definidas no bloco de .productStage acima) */
 @media(min-width:1001px){
-  .productStage{
-    max-width:none;
-    width:100%;
-    --panelWidth:280px;
-    grid-template-columns:var(--panelWidth) 1fr;
-  }
-  /* Sem margem sobrando fora da grade, as setas passam a flanquear a foto */
-  .slideArrow.left{left:calc(var(--panelWidth) + 20px)}
-  .slideArrow.right{right:20px}
+  .slideArrow.left{left:calc(var(--panelWidth, 320px) + 18px)}
+  .slideArrow.right{right:18px}
 }
 
 /* Cases: nome da obra em destaque na faixa preta, local acima e linha de apoio */
@@ -987,17 +1014,7 @@ body{font-family:var(--font-geist),"Helvetica Neue",Helvetica,Arial,sans-serif;f
   .companies>div:hover .companyLogo{transform:none}
 }
 
-/* Vitrine da frota: a altura passa a acompanhar a proporcao da foto
-   (2027x776 = 2.6121), para o equipamento aparecer inteiro em vez de ser
-   cortado no topo e na base em monitores largos. */
-@media(min-width:1001px){
-  .productStage{
-    height:calc((min(1420px, 100vw - 72px) - var(--panelWidth, 280px)) / 2.6121);
-    min-height:340px;
-    max-height:520px;
-  }
-  .productImage{background-position:center center}
-}
+/* Vitrine da frota: altura vem do aspect-ratio da foto (bloco .productStage) */
 
 /* Contorno sutil na faixa de contato, para separar a foto do fundo claro
    acima e do rodape escuro abaixo */
