@@ -228,4 +228,43 @@ export const equipmentSlides: EquipmentSlide[] = [
       { icon: "weight", label: "Tipo", value: "Portátil" },
     ],
   },
+  {
+    id: "rompedor-mb17000",
+    category: "Rompedor hidráulico",
+    name: "Atlas Copco MB 17000",
+    image: "/images/equipment-rompedor-mb17000.jpg",
+    imagePosition: "center 48%",
+    href: "#contato",
+    specs: [
+      { icon: "box", label: "Fabricante", value: "Atlas Copco" },
+      { icon: "gauge", label: "Modelo", value: "MB 17000" },
+      { icon: "weight", label: "Tipo", value: "Hidráulico" },
+    ],
+  },
+  {
+    id: "caminhao-basculante",
+    category: "Caminhão basculante",
+    name: "Truck 6x4",
+    image: "/images/equipment-caminhao-basculante.jpg",
+    imagePosition: "center 55%",
+    href: "#contato",
+    specs: [
+      { icon: "weight", label: "Carga útil", value: "20 t" },
+      { icon: "gauge", label: "Configuração", value: "Truck 6x4" },
+      { icon: "box", label: "Báscula", value: "Vedada para finos" },
+    ],
+  },
+  {
+    id: "gerador-ges350",
+    category: "Gerador",
+    name: "Caterpillar GES 350",
+    image: "/images/equipment-gerador-ges350.jpg",
+    imagePosition: "center 50%",
+    href: "#contato",
+    specs: [
+      { icon: "box", label: "Fabricante", value: "Caterpillar" },
+      { icon: "gauge", label: "Modelo", value: "GES 350" },
+      { icon: "weight", label: "Tipo", value: "Grupo gerador" },
+    ],
+  },
 ];
